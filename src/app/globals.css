@@ -19,3 +19,7 @@ body {
   height: 82px;
   background-size: cover;
 }
+
+.dialog-cover-btn {
+  @apply flex items-center rounded-full h-8 border-gray-500 border-2 hover:border-gray-200 hover:text-gray-200 transition duration-300
+}
