@@ -2,26 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: #171717;
+}
+
+.gradient-circle {
+  background: radial-gradient(circle, rgba(172, 39, 58, 0.9), transparent 70%, transparent 70%);
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+}
+
+.dialog-cover-bg {
+  background-image: url('/dialog-cover-bg.svg');
+  width: 310px;
+  height: 82px;
+  background-size: cover;
 }
