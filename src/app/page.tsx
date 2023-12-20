@@ -1,5 +1,5 @@
 import CookiesComponent from '@/components/CookiesComponent'
-import DialogCover from '@/components/DialogCover'
+import DialogContainer from '@/components/DialogContainer'
 import Header from '@/components/Header'
 import Image from 'next/image'
 
@@ -36,9 +36,10 @@ export default function HomePage() {
           </div>
         </section>
         <footer className='w-full py-10 flex justify-between items-end'>
+
           <CookiesComponent />
           <div className=''>
-            <DialogCover />
+            <DialogContainer />
           </div>
         </footer>
       </div>

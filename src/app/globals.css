@@ -23,3 +23,50 @@ body {
 .dialog-cover-btn {
   @apply flex items-center rounded-full h-8 border-gray-500 border-2 hover:border-gray-200 hover:text-gray-200 transition duration-300
 }
+
+.chat-container {
+  width: 294px;
+  height: 70px;
+  max-height: 70vh;
+  position: fixed;
+  bottom: 40px;
+  left: calc(70% - 147px);
+  transition: all 0.3s ease;
+}
+
+.chat-container.expanded {
+  height: 630px;
+  width: 390px;
+  left: calc(70% - 195px);
+}
+
+@media screen and (max-width: 768px) {
+  .chat-container {
+    left: calc(50% - 147px);
+  }
+  .chat-container.expanded {
+    height: 878px;
+    max-height: 80vh;
+    width: 626px;
+    left: calc(50% - 313px);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .chat-container {
+    left: calc(50% - 147px);
+  }
+  .chat-container.expanded {
+    height: 343px;
+    width: 304px;
+    left: calc(50% - 152px);
+  }
+}
+
+/* .chat-container {
+  @apply w-[294px] h-[70px] max-h-[70vh] fixed bottom-10 left-[calc(50%-147px)] transition-all duration-300 ease-in-out md:left-[calc(50%-147px)] xl:left-[calc(70%-147px)]
+}
+
+.chat-container.expanded {
+  @apply w-[304px] h-[343px] left-[calc(50%-152px)] md:w-[626px] md:max-h-[80vh] md:h-[878px] md:left-[calc(50%-313px)] xl:w-[390px] xl:left-[calc(70%-195px)] xl:h-[630px]
+} */
