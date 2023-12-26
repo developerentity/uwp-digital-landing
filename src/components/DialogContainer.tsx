@@ -1,7 +1,8 @@
 'use client'
 
-import { ChangeEvent, useEffect, useState } from "react";
+import { useState } from "react";
 import DialogCover from "./DialogCover";
+import InputComponent from "./InputComponent";
 
 export default function DialogContainer() {
 
@@ -11,44 +12,17 @@ export default function DialogContainer() {
         setIsExpanded(!isExpanded);
     };
 
-
-    const [text, setText] = useState('');
-    const [height, setHeight] = useState(18);
-
-    useEffect(() => {
-        console.log(height)
-    }, [text])
-
-
-    const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        setText(event.target.value);
-        setHeight(event.target.scrollHeight);
-    };
-
     return (
         <div className={`chat-container ${isExpanded ? 'expanded' : ''}`}>
             <DialogCover isExpanded={isExpanded} handleChatClick={handleChatClick} />
             <div className="bg-gradient-to-b from-[#000000] to-[#171717] border border-solid border-[#8B5CF6] flex-1 mt-9 max-[480px]:rounded-b-[18px] min-[480px]:rounded-[18px] overflow-hidden">
-                <div className='px-5 pb-3 sm:pb-5 flex flex-col justify-end h-full'>
-                    <div >
-                        MESSAGES
+                <div className='mx-auto w-[310px] pb-3 flex flex-col justify-end h-full'>
+
+                    <div className="pb-3">
+                        Не дышите.
                     </div>
-                    <div className="">
-                        <div className="input-container flex justify-between bg-[#404040] py-2 px-3 rounded-xl">
-                            <button className="p-1 h-[52px] bg-[#8B5CF6] rounded-xl flex justify-center items-center">
-                                <img className="w-[2rem]" src='./paperclip.svg' />
-                            </button>
-                            <textarea
-                                value={text}
-                                onChange={handleChange}
-                                style={{ height: `${height}px` }}
-                                className="resize-y overflow-auto text-lg bg-[#171717] rounded-xl p-2"
-                            />
-                            <button className="p-1 w-[52px] h-[52px] bg-[#8B5CF6] rounded-xl flex justify-center items-center">
-                                <img className="w-[1.5rem]" src='./mic.svg' />
-                            </button>
-                        </div>
-                    </div>
+
+                    <InputComponent />
                 </div>
             </div>
         </div>
