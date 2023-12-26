@@ -13,31 +13,24 @@ body {
   border-radius: 50%;
 }
 
-.dialog-cover-bg {
-  background-image: url('/dialog-cover-bg.svg');
-  width: 310px;
-  height: 82px;
-  background-size: cover;
-}
-
 .dialog-cover-btn {
   @apply flex items-center rounded-full  border-gray-500 border-2 hover:border-gray-200 hover:text-gray-200 transition duration-300
 }
 
 .dialog-coverage {
   background: #8B5CF6;
-  width: 304px;
+  width: 310px;
   height: 70px;
 }
 
 .chat-container {
   display: flex;
-  width: 304px;
+  width: 310px;
   height: 70px;
   max-height: 70vh;
   position: fixed;
   bottom: 40px;
-  left: calc(70% - 152px);
+  left: calc(70% - 155px);
   transition: all 0.3s ease;
   overflow: hidden;
 }
@@ -45,12 +38,13 @@ body {
 .chat-container.expanded {
   height: 630px;
   width: 390px;
+  left: 70%;
   left: calc(70% - 195px);
 }
 
 @media screen and (max-width: 768px) {
   .chat-container {
-    left: calc(50% - 152px);
+    left: calc(50% - 155px);
   }
 
   .chat-container.expanded {
@@ -63,7 +57,7 @@ body {
 
 @media screen and (max-width: 640px) {
   .chat-container {
-    left: calc(50% - 152px);
+    left: calc(50% - 155px);
   }
 
   .chat-container.expanded {
