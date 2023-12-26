@@ -21,17 +21,25 @@ body {
 }
 
 .dialog-cover-btn {
-  @apply flex items-center rounded-full h-8 border-gray-500 border-2 hover:border-gray-200 hover:text-gray-200 transition duration-300
+  @apply flex items-center rounded-full  border-gray-500 border-2 hover:border-gray-200 hover:text-gray-200 transition duration-300
+}
+
+.dialog-coverage {
+  background: #8B5CF6;
+  width: 304px;
+  height: 70px;
 }
 
 .chat-container {
-  width: 294px;
+  display: flex;
+  width: 304px;
   height: 70px;
   max-height: 70vh;
   position: fixed;
   bottom: 40px;
-  left: calc(70% - 147px);
+  left: calc(70% - 152px);
   transition: all 0.3s ease;
+  overflow: hidden;
 }
 
 .chat-container.expanded {
@@ -42,8 +50,9 @@ body {
 
 @media screen and (max-width: 768px) {
   .chat-container {
-    left: calc(50% - 147px);
+    left: calc(50% - 152px);
   }
+
   .chat-container.expanded {
     height: 878px;
     max-height: 80vh;
@@ -52,19 +61,38 @@ body {
   }
 }
 
+@media screen and (max-width: 640px) {
+  .chat-container {
+    left: calc(50% - 152px);
+  }
+
+  .chat-container.expanded {
+    height: 878px;
+    max-height: 80vh;
+    width: 426px;
+    left: calc(50% - 213px);
+  }
+}
+
 @media screen and (max-width: 480px) {
   .chat-container {
-    left: calc(50% - 147px);
+    left: calc(50% - 50vw);
+    width: 100%;
   }
+
+  .dialog-coverage {
+    width: 100%;
+  }
+
   .chat-container.expanded {
     height: 343px;
-    width: 304px;
-    left: calc(50% - 152px);
+    width: 100vw;
+    left: calc(50% - 50vw);
   }
 }
 
 /* .chat-container {
-  @apply w-[294px] h-[70px] max-h-[70vh] fixed bottom-10 left-[calc(50%-147px)] transition-all duration-300 ease-in-out md:left-[calc(50%-147px)] xl:left-[calc(70%-147px)]
+  @apply flex w-[294px] h-[70px] max-h-[70vh] fixed bottom-10 left-[calc(50%-147px)] transition-all duration-300 ease-in-out md:left-[calc(50%-147px)] xl:left-[calc(70%-147px)]
 }
 
 .chat-container.expanded {

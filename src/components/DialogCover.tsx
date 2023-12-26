@@ -2,8 +2,8 @@
 
 import { useState } from "react"
 interface PropsType {
-    isExpanded: boolean,
-    handleChatClick: () => void
+    isExpanded?: boolean,
+    handleChatClick?: () => void
 }
 export default function DialogCover({ isExpanded, handleChatClick }: PropsType) {
 
@@ -15,28 +15,35 @@ export default function DialogCover({ isExpanded, handleChatClick }: PropsType) 
     }
 
     return (
-        <div className='dialog-cover-bg pt-3 overflow-hidden px-6  absolute z-10 flex justify-between items-center  transform -translate-x-1/2 left-1/2 -top-3'>
-            <button
-                onClick={onMute}
-                className='dialog-cover-btn w-20 py-2 px-2.5 uppercase justify-between text-gray-500'>
-                <img className="h-5" src={isMute ? './muted.svg' : './unmuted.svg'} alt="is muted" />
-                <div className="">{isMute ? 'off' : 'on'}</div>
-            </button>
-
-            <div className='absolute z-20 transform -translate-x-1/2 left-1/2 top-2.5'>
-                <img src="./ai.svg" alt="ai" />
+        <div className="absolute w-full flex justify-center">
+            <div className='dialog-coverage border border-solid border-[#8B5CF6] rounded-[18px]'>
+                <div className="border-2 border-solid border-[#000000] rounded-[18px] h-full bg-[#171717] flex items-center justify-center px-4">
+                    <div className="flex w-[86px] h-[38px]">
+                        <button
+                            onClick={onMute}
+                            className=' dialog-cover-btn px-3 flex justify-between w-[100%]'
+                        >
+                            <img className="h-5" src={isMute ? './muted.svg' : './unmuted.svg'} alt="is muted" />
+                            <div className="uppercase">{isMute ? 'off' : 'on'}</div>
+                        </button>
+                    </div>
+                    <div className="flex items-center justify-center px-4">
+                        <img src="./ai.svg" alt="ai animation" />
+                    </div>
+                    <div className="flex justify-between  w-[86px] h-[38px]">
+                        <button
+                            onClick={handleChatClick}
+                            className='dialog-cover-btn w-[38px] justify-center'>
+                            <img className="h-5" src={isExpanded ? './arrow-down.svg' : './arrow-up.svg'} alt="arrow" />
+                        </button>
+                        <button className='dialog-cover-btn justify-center overflow-hidden w-[38px]'>
+                            <img src={flag} alt="flag" className="border rounded-full" />
+                        </button>
+                    </div>
+                </div>
             </div>
 
-            <div className='flex justify-between'>
-                <button
-                    onClick={handleChatClick}
-                    className='dialog-cover-btn w-8 p-1.5 justify-center'>
-                    <img className="h-5" src={isExpanded ? './arrow-down.svg' : './arrow-up.svg'} alt="arrow" />
-                </button>
-                <button className='dialog-cover-btn w-8 justify-center overflow-hidden ms-3'>
-                    <img src={flag} alt="flag" />
-                </button>
-            </div>
+
         </div>
     )
 }
