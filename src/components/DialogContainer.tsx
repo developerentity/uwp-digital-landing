@@ -15,16 +15,21 @@ export default function DialogContainer() {
     return (
         <div className={`chat-container ${isExpanded ? 'expanded' : ''}`}>
             <DialogCover isExpanded={isExpanded} handleChatClick={handleChatClick} />
-            <div className="bg-gradient-to-b from-[#000000] to-[#171717] border border-solid border-[#8B5CF6] flex-1 mt-9 max-[480px]:rounded-b-[18px] min-[480px]:rounded-[18px] overflow-hidden">
-                <div className='mx-auto w-[310px] pb-3 flex flex-col justify-end h-full'>
+            <div className="flex-1 pt-9 ">
+                <div className="shadow-lg shadow-black bg-gradient-to-b from-[#8B5CF6] to-[#171717] flex-1 max-[480px]:rounded-b-[18px] min-[480px]:rounded-[18px] h-full p-[1px]">
+                    <div className="bg-gradient-to-b from-[#000000] to-[#171717] flex-1 max-[480px]:rounded-b-[18px] min-[480px]:rounded-[18px] overflow-hidden h-full">
+                        <div className='mx-auto w-[310px] pb-3 flex flex-col justify-end h-full'>
 
-                    <div className="pb-3">
-                        Не дышите.
+                            <div className="pb-3">
+                                Не дышите.
+                            </div>
+
+                            <InputComponent />
+                        </div>
                     </div>
-
-                    <InputComponent />
                 </div>
             </div>
+
         </div>
     )
 } 

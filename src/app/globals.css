@@ -32,7 +32,6 @@ body {
   bottom: 40px;
   left: calc(70% - 155px);
   transition: all 0.3s ease;
-  overflow: hidden;
 }
 
 .chat-container.expanded {

@@ -15,7 +15,7 @@ export default function DialogCover({ isExpanded, handleChatClick }: PropsType) 
     }
 
     return (
-        <div className="absolute w-full flex justify-center">
+        <div className="absolute w-full flex justify-center z-20">
             <div className='dialog-coverage border border-solid border-[#8B5CF6] rounded-[18px]'>
                 <div className="border-2 border-solid border-[#000000] rounded-[18px] h-full bg-[#171717] flex items-center justify-center px-4">
                     <div className="flex w-[86px] h-[38px]">
