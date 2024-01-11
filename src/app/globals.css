@@ -14,7 +14,7 @@ body {
 }
 
 .dialog-cover-btn {
-  @apply flex items-center rounded-full  border-gray-500 border-2 hover:border-gray-200 hover:text-gray-200 transition duration-300
+  @apply flex items-center rounded-full border-gray-500 border-2 hover:border-gray-200 hover:text-gray-200 transition duration-300
 }
 
 .dialog-coverage {
@@ -91,3 +91,19 @@ body {
 .chat-container.expanded {
   @apply w-[304px] h-[343px] left-[calc(50%-152px)] md:w-[626px] md:max-h-[80vh] md:h-[878px] md:left-[calc(50%-313px)] xl:w-[390px] xl:left-[calc(70%-195px)] xl:h-[630px]
 } */
+
+.scalable-button {
+  @apply absolute transition-all duration-300 ease-in-out py-1 px-2 min-w-[28px] h-[28px] bg-[#8B5CF6] hover:bg-[#7755c6] rounded-[8px] flex justify-center items-center
+}
+
+.scaled {
+  @apply rounded-full transform scale-[1.7] translate-y-[-17%]
+}
+
+.lock-button {
+  @apply absolute opacity-0 transition-all  left-1/2 transform -translate-x-1/2 bg-[#323232] rounded-lg flex flex-col justify-center items-center w-[24px] py-1 bottom-[50px]
+}
+
+.lock-has-slid {
+  @apply  transform  opacity-100
+} 

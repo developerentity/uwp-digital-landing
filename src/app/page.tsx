@@ -1,7 +1,6 @@
 import CookiesComponent from '@/components/CookiesComponent'
 import DialogContainer from '@/components/DialogContainer'
 import Header from '@/components/Header'
-import Image from 'next/image'
 
 export default function HomePage() {
   return (
