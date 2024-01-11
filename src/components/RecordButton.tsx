@@ -4,13 +4,31 @@ import { useEffect, useState, MouseEvent } from "react"
 import { useSwipeable } from "react-swipeable";
 
 
-export default function RecordButton({ onStartRec, onStopRec, onResetRec, isAudioRecLocked, setIsAudioRecLocked }: IProps) {
-    const [isRecording, setIsRecording] = useState(false);
+export default function RecordButton({
+    isRecording,
+    onStartRec,
+    onStopRec,
+    onResetRec,
+    isAudioRecLocked,
+    setIsAudioRecLocked
+}: IProps) {
+
     const [isCursorOverMainButton, setIsCursorOverMainButton] = useState(false);
+    const [isRecordLessThanOneSecond, setIsRecordLessThanOneSecond] = useState(false)
 
     const config = {
         trackMouse: true,
     }
+
+    const onStartHandler = () => {
+        onStartRec()
+        setIsRecordLessThanOneSecond(true)
+        setTimeout(() => {
+            setIsRecordLessThanOneSecond(false)
+        }, 1000)
+    }
+
+    const onResetOnlyWhenRecording = () => isRecording && onResetRec()
 
     const handlers = useSwipeable({
         onSwiped: (eventData) => onLeaveButtonHandler(eventData.dir),
@@ -21,31 +39,27 @@ export default function RecordButton({ onStartRec, onStopRec, onResetRec, isAudi
         if (direction === "Up") {
             setIsAudioRecLocked(true)
         } else {
-            setIsRecording(false)
-            isRecording && onResetRec()
+            onResetOnlyWhenRecording()
         }
     }
 
     const handleMouseDown = () => {
-        if (!isAudioRecLocked) {
-            setIsRecording(true);
-            onStartRec();
+        if (!isRecording) {
+            onStartHandler();
         } else {
-            isRecording && onStopRec();
-            setIsRecording(false);
-            setTimeout(() => {
-                setIsAudioRecLocked(false)
-            }, 400)
+            onStopRec();
+            setIsAudioRecLocked(false)
         }
     };
 
     const handleMouseUp = () => {
-        if (isCursorOverMainButton) {
-            isRecording && onStopRec();
-            setIsRecording(false);
-            setTimeout(() => {
-                setIsAudioRecLocked(false)
-            }, 400)
+        if (isCursorOverMainButton && isRecording) {
+            if (isRecordLessThanOneSecond) {
+                onResetOnlyWhenRecording()
+            } else {
+                onStopRec();
+            }
+            setIsAudioRecLocked(false)
         }
     };
 
@@ -61,15 +75,13 @@ export default function RecordButton({ onStartRec, onStopRec, onResetRec, isAudi
         setIsCursorOverMainButton(isOverMainButton);
     };
 
-    const outsideElement = document.getElementById('recButton');
-
     const handleClickOutside = (event: Event) => {
-        if (!outsideElement?.contains(event.target as Node) && isRecording) {
-            onResetRec()
-            setIsRecording(false)
+        const outsideElement = document.getElementById('recButton');
+        if (!outsideElement?.contains(event.target as Node)) {
+            onResetOnlyWhenRecording()
             setTimeout(() => {
                 setIsAudioRecLocked(false)
-            }, 400)
+            }, 100)
         }
     }
 
@@ -111,6 +123,7 @@ export default function RecordButton({ onStartRec, onStopRec, onResetRec, isAudi
 }
 
 interface IProps {
+    isRecording: boolean
     onStartRec: () => void
     onStopRec: () => void
     onResetRec: () => void
