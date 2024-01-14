@@ -5,7 +5,7 @@ import { ChangeEvent } from "react";
 export default function AddFileButton({ handleFileChange }: IProps) {
 
     return (
-        <div>
+        <button>
             <label htmlFor="fileInput" className="px-1 w-[28px] h-[28px] rounded-xl flex justify-center items-center cursor-pointer">
                 <Image src='./paperclip.svg' alt='Paperclip' width={36} height={28} />
             </label>
@@ -15,7 +15,7 @@ export default function AddFileButton({ handleFileChange }: IProps) {
                 className="hidden"
                 onChange={handleFileChange}
             />
-        </div>
+        </button>
     )
 }
 

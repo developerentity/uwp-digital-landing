@@ -6,6 +6,7 @@ import { ChangeEvent, useState } from "react";
 import ReactTextareaAutosize from "react-textarea-autosize";
 import RecordButton from "./RecordButton";
 import AddFileButton from "./AddFileButton";
+import AudioVisualization from "./AudioVisualization";
 
 
 export default function InputComponent() {
@@ -71,11 +72,19 @@ export default function InputComponent() {
                             <span>{formatSeconds(recordingSeconds)}</span>
                         </div>
                     </div>
-                    : <AddFileButton handleFileChange={handleFileChange} />}
-                {initRecording
-                    ? <div className="absolute left-1/2 transform -translate-x-1/2 max-w-[138px] text-[10px] leading-3 text-center">
-                        {isAudioRecLocked ? 'Для отмены нажмите вне поля' : 'Для отмены отпустите курсор вне поля'}
-                    </div>
+                    : audio
+                        ? <button
+                            onClick={onCancelRecording}
+                            className="px-1 w-[28px] h-[28px] rounded-xl flex justify-center items-center">
+                            <Image src='./delete-icon.svg' alt='Reset audio' width={36} height={28} />
+                        </button>
+                        : <AddFileButton handleFileChange={handleFileChange} />}
+                {initRecording || audio
+                    ? initRecording
+                        ? <div className="absolute left-1/2 transform -translate-x-1/2 max-w-[138px] text-[10px] leading-3 text-center">
+                            {isAudioRecLocked ? 'Для отмены нажмите вне поля' : 'Для отмены отпустите курсор вне поля'}
+                        </div>
+                        : <AudioVisualization audioUrl={audio} />
                     : <div className="h-full flex justify-center w-[206px]">
                         <ReactTextareaAutosize
                             value={text}

@@ -13,7 +13,8 @@
     "react": "^18",
     "react-dom": "^18",
     "react-swipeable": "^7.0.1",
-    "react-textarea-autosize": "^8.5.3"
+    "react-textarea-autosize": "^8.5.3",
+    "wavesurfer.js": "^7.6.4"
   },
   "devDependencies": {
     "@types/node": "^20",
