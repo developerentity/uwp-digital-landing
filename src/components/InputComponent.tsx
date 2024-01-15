@@ -93,7 +93,7 @@ export default function InputComponent() {
                             maxRows={8}
                             className="px-2 py-1 bg-[#171717] rounded-lg resize-none  text-sm w-full h-full" />
                     </div>}
-                {text || file
+                {text || file || (!initRecording && audio)
                     ? <div className="relative w-[28px] h-[28px]">
                         <button
                             onClick={() => { }}
