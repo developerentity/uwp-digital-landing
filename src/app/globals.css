@@ -101,7 +101,7 @@ body {
 }
 
 .lock-button {
-  @apply absolute opacity-0 transition-all  left-1/2 transform -translate-x-1/2 bg-[#323232] rounded-lg flex flex-col justify-center items-center w-[24px] py-1 bottom-[50px]
+  @apply absolute opacity-0 transition-all  left-1/2 transform -translate-x-1/2 bg-[#323232] hover:bg-[#404040] rounded-lg flex flex-col justify-center items-center w-[24px] py-1 bottom-[50px]
 }
 
 .lock-has-slid {

@@ -28,6 +28,11 @@ export default function RecordButton({
         }, 1000)
     }
 
+    const onStopHandler = () => {
+        setIsAudioRecLocked(false)
+        onStopRec()
+    }
+
     const onResetOnlyWhenRecording = () => isRecording && onResetRec()
 
     const handlers = useSwipeable({
@@ -47,8 +52,7 @@ export default function RecordButton({
         if (!isRecording) {
             onStartHandler();
         } else {
-            onStopRec();
-            setIsAudioRecLocked(false)
+            onStopHandler()
         }
     };
 
@@ -57,9 +61,8 @@ export default function RecordButton({
             if (isRecordLessThanOneSecond) {
                 onResetOnlyWhenRecording()
             } else {
-                onStopRec();
+                onStopHandler()
             }
-            setIsAudioRecLocked(false)
         }
     };
 
@@ -94,7 +97,9 @@ export default function RecordButton({
 
     return (
         <div id='recButton' {...handlers} className="relative w-[28px] h-[28px]">
-            <button className={`lock-button ${isRecording ? 'lock-has-slid' : ''}`}>
+            <button
+                onClick={onStopHandler}
+                className={`lock-button ${isRecording ? 'lock-has-slid' : ''}`}>
                 <img
                     src={isAudioRecLocked ? './lock-rec-icon.svg' : './unlock-rec-icon.svg'}
                     className="pointer-events-none"
