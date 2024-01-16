@@ -17,6 +17,24 @@ body {
   @apply flex items-center rounded-full border-gray-500 border-2 hover:border-gray-200 hover:text-gray-200 transition duration-300
 }
 
+.language-button-container {
+  @apply relative h-[38px] w-[38px]
+}
+
+.language-button-content {
+  @apply h-[38px] w-[38px] absolute bg-[#171717] flex overflow-hidden rounded-full border-gray-500 transition-all duration-300 ease-in-out
+}
+
+.to-up {
+  bottom: 0;
+  @apply flex-col-reverse
+}
+
+.to-down {
+  top: 0;
+  @apply flex-col
+}
+
 .dialog-coverage {
   background: #8B5CF6;
   width: 310px;
@@ -101,9 +119,9 @@ body {
 }
 
 .lock-button {
-  @apply absolute opacity-0 transition-all  left-1/2 transform -translate-x-1/2 bg-[#323232] hover:bg-[#404040] rounded-lg flex flex-col justify-center items-center w-[24px] py-1 bottom-[50px]
+  @apply absolute opacity-0 transition-all left-1/2 transform -translate-x-1/2 bg-[#323232] hover:bg-[#404040] rounded-lg flex flex-col justify-center items-center w-[24px] py-1 bottom-[50px]
 }
 
 .lock-has-slid {
-  @apply  transform  opacity-100
-} 
+  @apply transform opacity-100
+}

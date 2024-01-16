@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react"
+import LanguageSelect from "./LanguageSelect"
 interface PropsType {
     isExpanded?: boolean,
     handleChatClick?: () => void
@@ -8,7 +9,6 @@ interface PropsType {
 export default function DialogCover({ isExpanded, handleChatClick }: PropsType) {
 
     const [isMute, setIsMute] = useState(false)
-    const flag = './flags/UA.svg'
 
     const onMute = () => {
         setIsMute(!isMute)
@@ -36,14 +36,10 @@ export default function DialogCover({ isExpanded, handleChatClick }: PropsType) 
                             className='dialog-cover-btn w-[38px] justify-center'>
                             <img className="h-5" src={isExpanded ? './arrow-down.svg' : './arrow-up.svg'} alt="arrow" />
                         </button>
-                        <button className='dialog-cover-btn justify-center overflow-hidden w-[38px]'>
-                            <img src={flag} alt="flag" className="border rounded-full" />
-                        </button>
+                        <LanguageSelect direction={isExpanded ? 'to-down' : 'to-up'} />
                     </div>
                 </div>
             </div>
-
-
         </div>
     )
 }
