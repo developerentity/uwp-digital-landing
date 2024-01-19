@@ -110,7 +110,9 @@ export default function LanguageSelect({ direction }: ILanguageSelectProps) {
 function IconContainer({ flagUrl }: IIconContainerProps) {
     return (
         <div className='p-[2px]'>
-            <img src={flagUrl} alt="flag" className="border rounded-full hover:border-gray-500 pointer-events-none h-[30px] w-[30px]" />
+            <div className='border rounded-full border-gray-500 hover:border-gray-100 cursor-pointer h-[30px] w-[30px]'>
+                <img src={flagUrl} alt="flag" className="pointer-events-none rounded-full" />
+            </div>
         </div>
     )
 }
