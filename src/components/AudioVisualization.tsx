@@ -3,7 +3,7 @@ import WaveSurfer from 'wavesurfer.js'
 import { formatTime } from "@/utils/format-time";
 
 
-export default function AudioVisualization({ audioUrl }: AudioVisualizationProps) {
+export default function AudioVisualization({ audioUrl, isRightSided, isFromInput, handleAudioPlaying }: AudioVisualizationProps) {
 
     const wavesurferRef = useRef<WaveSurfer | null>(null);
     const [isPlaying, setIsPlaying] = useState(false);
@@ -56,6 +56,12 @@ export default function AudioVisualization({ audioUrl }: AudioVisualizationProps
         };
     }, [audioUrl]);
 
+    useEffect(() => {
+        if (typeof handleAudioPlaying === 'function') {
+            handleAudioPlaying(isPlaying)
+        }
+    }, [isPlaying])
+
     const handleTogglePlay = () => {
         if (wavesurferRef.current) {
             if (isPlaying) {
@@ -66,8 +72,14 @@ export default function AudioVisualization({ audioUrl }: AudioVisualizationProps
         }
     };
 
+    const bgColor = isFromInput
+        ? 'bg-[#171717]'
+        : isPlaying
+            ? 'bg-[#4A3D6B]'
+            : 'bg-[#404040]'
+
     return (
-        <div className="flex justify-between w-[206px] h-[28px] rounded-full bg-black ps-[1px] pt-[1px] pb-[1px] pe-3">
+        <div className={`${isRightSided ? 'flex-row-reverse' : ''} ${bgColor} flex justify-between w-[206px] h-[28px] rounded-full p-[1px]`}>
             <div className="rounded-full w-[26px] h-[26px] flex justify-center items-center bg-gradient-to-b from-[#FFFFFF] to-[#404040]">
                 <button onClick={handleTogglePlay} className="flex justify-center items-center rounded-full w-[22px] h-[22px] p-[2px] bg-black">
                     {isPlaying
@@ -80,7 +92,7 @@ export default function AudioVisualization({ audioUrl }: AudioVisualizationProps
                 </button>
             </div>
             <div id="waveform"></div>
-            <div className="w-[24px] align-middle text-xs font-extralight flex items-center ">
+            <div className={`${isRightSided ? 'ps-3' : 'pe-3'} w-[36px] align-middle text-xs font-extralight flex items-center`}>
                 {remainingTime !== 0
                     ? formatTime(parseInt(remainingTime.toFixed(), 10))
                     : formatTime(parseInt(duration.toFixed(), 10))}
@@ -91,4 +103,7 @@ export default function AudioVisualization({ audioUrl }: AudioVisualizationProps
 
 interface AudioVisualizationProps {
     audioUrl: string | null;
+    isRightSided?: boolean;
+    isFromInput?: boolean;
+    handleAudioPlaying?: (val: boolean) => void;
 }

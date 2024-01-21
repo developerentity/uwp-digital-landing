@@ -84,7 +84,7 @@ export default function InputComponent() {
                         ? <div className="absolute left-1/2 transform -translate-x-1/2 max-w-[138px] text-[10px] leading-3 text-center">
                             {isAudioRecLocked ? 'Для отмены нажмите вне поля' : 'Для отмены отпустите курсор вне поля'}
                         </div>
-                        : <AudioVisualization audioUrl={audio} />
+                        : <AudioVisualization audioUrl={audio} isFromInput />
                     : <div className="h-full flex justify-center w-[206px]">
                         <ReactTextareaAutosize
                             value={text}
