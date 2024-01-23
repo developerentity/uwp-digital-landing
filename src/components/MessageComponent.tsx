@@ -3,8 +3,9 @@ import AudioVisualization from "./AudioVisualization"
 import AvatarPlug from "./AvatarPlug"
 
 
-export function MessageComponent({ author, text, audio }: IProps) {
+export function MessageComponent({ message }: IProps) {
 
+    const { id, author, text, audio } = message
     const isFromThisUser = author.name === 'authorized.name'
     const [isAudioPlaying, setIsAudioPlaying] = useState(false)
 
@@ -13,7 +14,7 @@ export function MessageComponent({ author, text, audio }: IProps) {
     return (
         <div className={`${isFromThisUser ? 'flex-row-reverse' : 'flex-row'} flex mt-3`}>
             <div>
-                {author.avatar
+                {!isFromThisUser
                     ? <div className="pointer-events-none rounded-full w-[26px] h-[26px]">
                         <img src={author.avatar} alt="avatar" className="pointer-events-none" />
                     </div>
@@ -25,6 +26,7 @@ export function MessageComponent({ author, text, audio }: IProps) {
                 </div>
                 {audio && <div className="mt-2">
                     <AudioVisualization
+                        id={id}
                         audioUrl={audio}
                         isRightSided={isFromThisUser}
                         handleAudioPlaying={handleAudioPlaying} />
@@ -35,10 +37,13 @@ export function MessageComponent({ author, text, audio }: IProps) {
 }
 
 interface IProps {
-    author: {
-        name: string
-        avatar: string
+    message: {
+        id: string
+        author: {
+            name: string
+            avatar: string
+        }
+        text: string
+        audio?: string
     }
-    text: string
-    audio?: string
 }
