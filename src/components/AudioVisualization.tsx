@@ -51,6 +51,10 @@ export default function AudioVisualization({ id, audioUrl, isRightSided, isFromI
             setIsPlaying(false);
         });
 
+        wavesurferRef.current.on('finish', function () {
+            wavesurferRef.current?.seekTo(0);
+        });
+
         return () => {
             if (wavesurferRef.current) {
                 wavesurferRef.current.destroy();
