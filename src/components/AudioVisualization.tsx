@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import WaveSurfer from 'wavesurfer.js'
 import { formatTime } from "@/utils/format-time";
-import generate4AlphabetKey from "@/utils/generate-key";
 
 
 export default function AudioVisualization({ id, audioUrl, isRightSided, isFromInput, handleAudioPlaying }: AudioVisualizationProps) {
@@ -11,11 +10,11 @@ export default function AudioVisualization({ id, audioUrl, isRightSided, isFromI
     const [duration, setDuration] = useState<number>(0);
     const [remainingTime, setRemainingTime] = useState<number>(0);
 
-    const instantId = id || 'waveform'
+    const containerId = id || 'waveform'
 
     useEffect(() => {
         wavesurferRef.current = WaveSurfer.create({
-            container: `#${instantId}`,
+            container: `#${containerId}`,
             waveColor: '#9CA3AF',
             progressColor: '#8B5CF6',
             interact: false,
@@ -94,7 +93,7 @@ export default function AudioVisualization({ id, audioUrl, isRightSided, isFromI
                         </svg>}
                 </button>
             </div>
-            <div id={instantId}></div>
+            <div id={containerId}></div>
             <div className={`${isRightSided ? 'ps-3' : 'pe-3'} w-[36px] align-middle text-xs font-extralight flex items-center`}>
                 {remainingTime !== 0
                     ? formatTime(parseInt(remainingTime.toFixed(), 10))
@@ -105,7 +104,7 @@ export default function AudioVisualization({ id, audioUrl, isRightSided, isFromI
 }
 
 interface AudioVisualizationProps {
-    id: string
+    id?: string
     audioUrl: string | null;
     isRightSided?: boolean;
     isFromInput?: boolean;
