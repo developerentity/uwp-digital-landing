@@ -1,9 +1,11 @@
 'use client'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DialogCover from "./DialogCover";
 import InputComponent from "./InputComponent";
-import { MessageComponent } from "./MessageComponent";
+import MessageList from "./MessageList";
+import useScroll from "@/hooks/useScroll";
+import useElementHeight from "@/hooks/useElementHeight";
 
 const messages = [
     {
@@ -93,27 +95,43 @@ const messages = [
 export default function DialogContainer() {
 
     const [isExpanded, setIsExpanded] = useState(false);
+    const { listRef, isScrolledToBottom, scrollToBottom } = useScroll(messages)
+    const { elementRef, size } = useElementHeight()
 
     const handleChatClick = () => {
         setIsExpanded(!isExpanded);
     };
 
+    useEffect(() => {
+        scrollToBottom()
+    }, [size])
+
     return (
         <div className={`chat-container ${isExpanded ? 'expanded' : ''}`}>
-            <DialogCover isExpanded={isExpanded} handleChatClick={handleChatClick} />
+            <div className="z-30">
+                <DialogCover isExpanded={isExpanded} handleChatClick={handleChatClick} />
+            </div>
             <div className="flex-1 pt-9 ">
                 <div className="shadow-lg shadow-black bg-gradient-to-b from-[#8B5CF6] to-[#171717] flex-1 max-[480px]:rounded-b-[18px] min-[480px]:rounded-[18px] h-full p-[1px]">
                     <div className="bg-gradient-to-b from-[#000000] to-[#171717] flex-1 max-[480px]:rounded-b-[18px] min-[480px]:rounded-[18px] overflow-hidden h-full">
                         <div className='pb-3 flex flex-col justify-end h-full'>
 
-                            <div className="pb-3 px-3 overflow-scroll">
-                                {messages.length && messages.map(item =>
-                                    <MessageComponent key={item.id} author={item.author} text={item.text} audio={item.audio} />)}
+                            <div ref={listRef} className='pb-3 overflow-y-auto flex-1 scroll-smooth'>
+                                <MessageList messages={messages} />
                             </div>
 
-                            <div className=" w-[310px] mx-auto">
-                                <InputComponent />
+                            <div className='relative'>
+                                <button
+                                    onClick={scrollToBottom}
+                                    className={`${isScrolledToBottom? '' : 'opacity-100 -translate-y-[130%]'} absolute duration-300 opacity-0 transition-all  w-[48px] h-[48px] bg-[#171717] m-auto z-10 left-1/2 transform -translate-x-1/2 dialog-cover-btn`}>
+                                    <img className="h-6" src='./arrow-down.svg' alt="arrow down" />
+                                </button>
+                                <div className={`${isScrolledToBottom ? '' : 'opacity-100 -translate-y-[100%]'} duration-300 absolute opacity-0 transition-all shadow-top h-0 z-0 w-full`} />
+                                <div ref={elementRef} className="w-[310px] mx-auto z-20 relative">
+                                    <InputComponent />
+                                </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
