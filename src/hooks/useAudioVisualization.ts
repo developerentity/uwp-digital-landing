@@ -72,7 +72,7 @@ export default function useAudioVisualization(
 
   const onStopPlaying = () => {
     if (waveSurferRef.current) {
-      waveSurferRef.current?.stop();
+      waveSurferRef.current.stop();
     }
   };
 
