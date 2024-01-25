@@ -3,7 +3,7 @@ import AudioVisualization from "./AudioVisualization"
 import AvatarPlug from "./AvatarPlug"
 
 
-export function MessageComponent({ message }: IProps) {
+export function MessageComponent({ message, playedAudio, setPlayedAudio }: IProps) {
 
     const { id, author, text, audio } = message
     const isFromThisUser = author.name === 'authorized.name'
@@ -29,7 +29,9 @@ export function MessageComponent({ message }: IProps) {
                         id={id}
                         audioUrl={audio}
                         isRightSided={isFromThisUser}
-                        handleAudioPlaying={handleAudioPlaying} />
+                        handleAudioPlaying={handleAudioPlaying}
+                        playedAudio={playedAudio}
+                        setPlayedAudio={setPlayedAudio} />
                 </div>}
             </div>
         </div>
@@ -45,5 +47,7 @@ interface IProps {
         }
         text: string
         audio?: string
-    }
+    },
+    playedAudio: string | null
+    setPlayedAudio: (id: string) => void
 }

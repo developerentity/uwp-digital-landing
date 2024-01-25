@@ -9,7 +9,7 @@ import useElementHeight from "@/hooks/useElementHeight";
 
 const messages = [
     {
-        id: 'asdfasdfasdf',
+        id: '1',
         author: {
             avatar: "./ai.svg",
             name: "Great Name",
@@ -18,7 +18,7 @@ const messages = [
         audio: 'sasfasf'
     },
     {
-        id: 'asdfasdfasdf',
+        id: '2',
         author: {
             avatar: "./ai.svg",
             name: "Great Name",
@@ -27,7 +27,7 @@ const messages = [
         audio: 'sasfasf'
     },
     {
-        id: 'asdfasdfasdf',
+        id: '3',
         author: {
             avatar: "./ai.svg",
             name: "authorized.name",
@@ -36,7 +36,7 @@ const messages = [
         audio: 'sasfasf'
     },
     {
-        id: 'asdfasdfasdf',
+        id: '4',
         author: {
             avatar: "./ai.svg",
             name: "Great Name",
@@ -45,7 +45,7 @@ const messages = [
         audio: 'sasfasf'
     },
     {
-        id: 'asdfasdfasdf',
+        id: '5',
         author: {
             avatar: "./ai.svg",
             name: "Great Name",
@@ -54,7 +54,7 @@ const messages = [
         audio: 'sasfasf'
     },
     {
-        id: 'asdfasdfasdf',
+        id: '6',
         author: {
             avatar: "./ai.svg",
             name: "authorized.name",
@@ -63,7 +63,7 @@ const messages = [
         audio: 'sasfasf'
     },
     {
-        id: 'asdfasdfasdf',
+        id: '7',
         author: {
             avatar: "./ai.svg",
             name: "Great Name",
@@ -72,7 +72,7 @@ const messages = [
         audio: 'sasfasf'
     },
     {
-        id: 'asdfasdfasdf',
+        id: '8',
         author: {
             avatar: "./ai.svg",
             name: "Great Name",
@@ -81,7 +81,7 @@ const messages = [
         audio: 'sasfasf'
     },
     {
-        id: 'asdfasdfasdf',
+        id: '9',
         author: {
             avatar: "./ai.svg",
             name: "authorized.name",
@@ -123,7 +123,7 @@ export default function DialogContainer() {
                             <div className='relative'>
                                 <button
                                     onClick={scrollToBottom}
-                                    className={`${isScrolledToBottom? '' : 'opacity-100 -translate-y-[130%]'} absolute duration-300 opacity-0 transition-all  w-[48px] h-[48px] bg-[#171717] m-auto z-10 left-1/2 transform -translate-x-1/2 dialog-cover-btn`}>
+                                    className={`${isScrolledToBottom ? '' : 'opacity-100 -translate-y-[130%]'} absolute duration-300 opacity-0 transition-all  w-[48px] h-[48px] bg-[#171717] m-auto z-10 left-1/2 transform -translate-x-1/2 dialog-cover-btn`}>
                                     <img className="h-6" src='./arrow-down.svg' alt="arrow down" />
                                 </button>
                                 <div className={`${isScrolledToBottom ? '' : 'opacity-100 -translate-y-[100%]'} duration-300 absolute opacity-0 transition-all shadow-top h-0 z-0 w-full`} />

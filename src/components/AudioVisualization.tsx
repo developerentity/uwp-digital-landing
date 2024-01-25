@@ -1,82 +1,41 @@
-import { useEffect, useRef, useState } from "react";
-import WaveSurfer from 'wavesurfer.js'
+import { useEffect } from "react";
 import { formatTime } from "@/utils/format-time";
+import useAudioVisualization from "@/hooks/useAudioVisualization";
+import { replaceDigitsWithLetters } from "@/handlers/formfat-id";
 
 
-export default function AudioVisualization({ id, audioUrl, isRightSided, isFromInput, handleAudioPlaying }: AudioVisualizationProps) {
+export default function AudioVisualization({ id, audioUrl, isRightSided, isFromInput, handleAudioPlaying, playedAudio, setPlayedAudio }: AudioVisualizationProps) {
 
-    const wavesurferRef = useRef<WaveSurfer | null>(null);
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [duration, setDuration] = useState<number>(0);
-    const [remainingTime, setRemainingTime] = useState<number>(0);
+    const formattedId = id && replaceDigitsWithLetters(id)
+    const containerId = formattedId || 'waveform'
+    const {
+        isPlaying,
+        duration,
+        remainingTime,
+        handleTogglePlay,
+        onStopPlaying
+    } = useAudioVisualization(audioUrl, containerId)
 
-    const containerId = id || 'waveform'
 
+    // stop all the other playing audio if this is played
     useEffect(() => {
-        wavesurferRef.current = WaveSurfer.create({
-            container: `#${containerId}`,
-            waveColor: '#9CA3AF',
-            progressColor: '#8B5CF6',
-            interact: false,
-            cursorWidth: 0,
-            barWidth: 2,
-            barGap: 2,
-            height: 28,
-            width: 100,
-        });
+        if (typeof setPlayedAudio === "function" && isPlaying && formattedId) {
+            setPlayedAudio(formattedId)
+        }
+    }, [isPlaying])
 
-        setTimeout(() => {
-            audioUrl && wavesurferRef.current?.load(audioUrl);
-        }, 200)
-
-        wavesurferRef.current.on('ready', () => {
-            const trackDuration = wavesurferRef.current?.getDuration();
-            trackDuration && setDuration(trackDuration);
-        });
-
-        wavesurferRef.current.on('audioprocess', () => {
-            if (wavesurferRef.current?.isPlaying()) {
-                const totalTime = wavesurferRef.current.getDuration(),
-                    currentTime = wavesurferRef.current.getCurrentTime(),
-                    remainingTime = totalTime - currentTime;
-                setRemainingTime(remainingTime)
-            }
-        });
-
-        wavesurferRef.current.on('play', () => {
-            setIsPlaying(true);
-        });
-
-        wavesurferRef.current.on('pause', () => {
-            setIsPlaying(false);
-        });
-
-        wavesurferRef.current.on('finish', function () {
-            wavesurferRef.current?.seekTo(0);
-        });
-
-        return () => {
-            if (wavesurferRef.current) {
-                wavesurferRef.current.destroy();
-            }
-        };
-    }, [audioUrl]);
+    const isThisItemShouldPlay = formattedId === playedAudio;
+    useEffect(() => {
+        if (!isThisItemShouldPlay) {
+            onStopPlaying()
+        }
+    }, [isThisItemShouldPlay])
 
     useEffect(() => {
         if (typeof handleAudioPlaying === 'function') {
             handleAudioPlaying(isPlaying)
         }
     }, [isPlaying])
-
-    const handleTogglePlay = () => {
-        if (wavesurferRef.current) {
-            if (isPlaying) {
-                wavesurferRef.current.pause();
-            } else {
-                wavesurferRef.current.play();
-            }
-        }
-    };
 
     const bgColor = isFromInput
         ? 'bg-[#171717]'
@@ -108,9 +67,11 @@ export default function AudioVisualization({ id, audioUrl, isRightSided, isFromI
 }
 
 interface AudioVisualizationProps {
-    id?: string
+    id?: string;
     audioUrl: string | null;
     isRightSided?: boolean;
     isFromInput?: boolean;
     handleAudioPlaying?: (val: boolean) => void;
+    playedAudio?: string | null;
+    setPlayedAudio?: (id: string) => void;
 }
