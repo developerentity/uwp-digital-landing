@@ -1,15 +1,14 @@
-import { useState } from "react"
 import AudioVisualization from "./AudioVisualization"
 import AvatarPlug from "./AvatarPlug"
+import { replaceDigitsWithLetters } from "@/handlers/format-id"
 
 
 export function MessageComponent({ message, playedAudio, setPlayedAudio }: IProps) {
 
     const { id, author, text, audio } = message
     const isFromThisUser = author.name === 'authorized.name'
-    const [isAudioPlaying, setIsAudioPlaying] = useState(false)
-
-    const handleAudioPlaying = (val: boolean) => setIsAudioPlaying(val)
+    const formattedId = replaceDigitsWithLetters(id)
+    const isAudioPlaying = formattedId === playedAudio
 
     return (
         <div className={`${isFromThisUser ? 'flex-row-reverse' : 'flex-row'} flex mt-3`}>
@@ -26,10 +25,9 @@ export function MessageComponent({ message, playedAudio, setPlayedAudio }: IProp
                 </div>
                 {audio && <div className="mt-2">
                     <AudioVisualization
-                        id={id}
+                        id={formattedId}
                         audioUrl={audio}
                         isRightSided={isFromThisUser}
-                        handleAudioPlaying={handleAudioPlaying}
                         playedAudio={playedAudio}
                         setPlayedAudio={setPlayedAudio} />
                 </div>}

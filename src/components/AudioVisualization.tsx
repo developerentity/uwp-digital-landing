@@ -1,13 +1,11 @@
 import { useEffect } from "react";
 import { formatTime } from "@/utils/format-time";
 import useAudioVisualization from "@/hooks/useAudioVisualization";
-import { replaceDigitsWithLetters } from "@/handlers/formfat-id";
 
 
-export default function AudioVisualization({ id, audioUrl, isRightSided, isFromInput, handleAudioPlaying, playedAudio, setPlayedAudio }: AudioVisualizationProps) {
+export default function AudioVisualization({ id, audioUrl, isRightSided, isFromInput, playedAudio, setPlayedAudio }: AudioVisualizationProps) {
 
-    const formattedId = id && replaceDigitsWithLetters(id)
-    const containerId = formattedId || 'waveform'
+    const containerId = id || 'waveform'
     const {
         isPlaying,
         duration,
@@ -15,27 +13,20 @@ export default function AudioVisualization({ id, audioUrl, isRightSided, isFromI
         handleTogglePlay,
         onStopPlaying
     } = useAudioVisualization(audioUrl, containerId)
-
+    const isThisItemShouldPlay = id === playedAudio;
 
     // stop all the other playing audio if this is played
     useEffect(() => {
-        if (typeof setPlayedAudio === "function" && isPlaying && formattedId) {
-            setPlayedAudio(formattedId)
+        if (typeof setPlayedAudio === "function" && isPlaying && id) {
+            setPlayedAudio(id)
         }
     }, [isPlaying])
 
-    const isThisItemShouldPlay = formattedId === playedAudio;
     useEffect(() => {
         if (!isThisItemShouldPlay) {
             onStopPlaying()
         }
     }, [isThisItemShouldPlay])
-
-    useEffect(() => {
-        if (typeof handleAudioPlaying === 'function') {
-            handleAudioPlaying(isPlaying)
-        }
-    }, [isPlaying])
 
     const bgColor = isFromInput
         ? 'bg-[#171717]'
@@ -71,7 +62,6 @@ interface AudioVisualizationProps {
     audioUrl: string | null;
     isRightSided?: boolean;
     isFromInput?: boolean;
-    handleAudioPlaying?: (val: boolean) => void;
     playedAudio?: string | null;
     setPlayedAudio?: (id: string) => void;
 }
