@@ -35,10 +35,8 @@ body {
   @apply flex-col
 }
 
-.dialog-coverage {
-  background: #8B5CF6;
-  width: 310px;
-  height: 70px;
+.dialog-cover {
+  @apply border border-solid border-[#8B5CF6] rounded-[18px] w-[310px] h-[70px]
 }
 
 .chat-container {
@@ -91,7 +89,7 @@ body {
     width: 100%;
   }
 
-  .dialog-coverage {
+  .dialog-cover {
     width: 100%;
   }
 

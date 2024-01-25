@@ -108,10 +108,10 @@ export default function DialogContainer() {
 
     return (
         <div className={`chat-container ${isExpanded ? 'expanded' : ''}`}>
-            <div className="z-30">
+            <div className="z-30 absolute flex justify-center w-full">
                 <DialogCover isExpanded={isExpanded} handleChatClick={handleChatClick} />
             </div>
-            <div className="flex-1 pt-9 ">
+            <div className="flex-1 pt-9 w-full">
                 <div className="shadow-lg shadow-black bg-gradient-to-b from-[#8B5CF6] to-[#171717] flex-1 max-[480px]:rounded-b-[18px] min-[480px]:rounded-[18px] h-full p-[1px]">
                     <div className="bg-gradient-to-b from-[#000000] to-[#171717] flex-1 max-[480px]:rounded-b-[18px] min-[480px]:rounded-[18px] overflow-hidden h-full">
                         <div className='pb-3 flex flex-col justify-end h-full'>
